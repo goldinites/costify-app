@@ -8,6 +8,17 @@
   }
 }
 
+.glass-item {
+  background-color: #fff1;
+  box-shadow: 0 0 0 1px #fff3;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: #fff3;
+    box-shadow: 0 0 0 1px #fff3;
+  }
+}
+
 .button {}
 
 .input {

@@ -1,6 +1,16 @@
 <template>
-  <div class="search">
-    <input class="search__input input" type="text">
+  <div
+    v-click-outside="searchUnfocusHandler"
+    class="search"
+    :class="{'in-focus' : searchFocus}"
+    @click="searchFocusHandler"
+  >
+    <VInput
+      v-model="searchString"
+      class="search__input input"
+      :input-type="'text'"
+      :placeholder="'Поиск'"
+    />
     <button class="search__button">
       <svg-icon name="search" />
     </button>
@@ -8,8 +18,24 @@
 </template>
 
 <script>
+import VInput from '@/components/ui/VInput'
 export default {
-  name: 'Search'
+  name: 'Search',
+  components: { VInput },
+  data () {
+    return {
+      searchString: '',
+      searchFocus: false
+    }
+  },
+  methods: {
+    searchFocusHandler () {
+      this.searchFocus = true
+    },
+    searchUnfocusHandler () {
+      this.searchFocus = false
+    }
+  }
 }
 </script>
 
@@ -20,14 +46,21 @@ export default {
   background-color: $glass_bg;
   border-radius: 5px;
   transition: .5s;
-  &:hover {
+  overflow: hidden;
+  &:hover, &.in-focus {
     @include hover_slide_effect;
   }
   &__input {
-    display: block;
-    background-color: transparent;
-    padding: 5px 10px;
-    color: #fff;
+    &:deep(input) {
+      display: block;
+      background: transparent;
+      height: 100%;
+      padding: 5px 10px;
+      color: $white;
+      &::placeholder {
+        color: $white;
+      }
+    }
   }
   &__button {
     display: flex;
@@ -35,8 +68,16 @@ export default {
     cursor: pointer;
     background-color: transparent;
     padding: 5px;
+    transition: .3s;
+
+    &:hover {
+      & svg {
+        transform: scale(1.1);
+      }
+    }
 
     & svg {
+      transition: .3s;
       @include icon_size(30px, 30px);
       fill: #fff;
     }

@@ -1,17 +1,13 @@
 <template>
   <div class="header">
-    <div class="container">
-      <div class="header__row">
-        <div class="logo">
-          <NuxtLink class="logo__link" to="/">
-            Costify
-          </NuxtLink>
-        </div>
-        <MainMenu />
-        <Search />
-        <User />
-      </div>
+    <div class="logo">
+      <NuxtLink class="logo__link" to="/">
+        Costify
+      </NuxtLink>
     </div>
+    <MainMenu />
+    <Search />
+    <User />
   </div>
 </template>
 
@@ -28,13 +24,10 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+  display: flex;
+  align-items: center;
+  gap: 75px;
   margin-top: 35px;
-
-  &__row {
-    display: flex;
-    align-items: center;
-    gap: 75px;
-  }
 }
 
 .logo {

@@ -1,5 +1,5 @@
 <template>
-  <div id="costify">
+  <div id="costify" class="container">
     <TheHeader />
     <Nuxt />
   </div>
