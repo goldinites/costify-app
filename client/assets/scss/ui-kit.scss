@@ -1,0 +1,15 @@
+.link {
+  display: inline;
+  color: $font_color;
+  background: linear-gradient(currentColor,currentColor) no-repeat right 100%/0 1px;
+  transition: background-size 0.35s ease-in-out;
+  &:hover {
+    background: linear-gradient(currentColor,currentColor) no-repeat left 100%/100% 1px;
+  }
+}
+
+.button {}
+
+.input {
+
+}

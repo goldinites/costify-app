@@ -18,6 +18,10 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/scss/reset.scss',
+    '~/assets/scss/fonts.scss',
+    '~/assets/scss/styles.scss',
+    '~/assets/scss/ui-kit.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -28,14 +32,23 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+  styleResources: {
+    scss: ['~/assets/scss/vars.scss', '~/assets/scss/mixins.scss']
+  },
+
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/style-resources'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/svg-sprite'
   ],
+  svgSprite: {
+    input: '~/assets/svg/'
+  },
 
   serverMiddleware: {
     '/api': '~/../server'
@@ -43,5 +56,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    postcss: false,
+    extractCSS: false
   }
 }

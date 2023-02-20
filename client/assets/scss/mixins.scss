@@ -1,0 +1,13 @@
+@mixin icon_size ($width, $height) {
+    width: $width;
+    height: $height;
+}
+
+@mixin font ($font_size, $line_height) {
+  font-size: $font_size;
+  line-height: $line_height;
+}
+
+@mixin hover_slide_effect {
+  box-shadow: 4px 4px 0 0 #89898952, inset 10px 10px 15px 3px #0002, inset -20px -20px 25px 0px #0003;
+}
