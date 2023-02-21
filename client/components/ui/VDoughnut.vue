@@ -13,7 +13,9 @@ export default {
   props: {
     chartData: {
       type: Object,
-      required: true
+      required: true,
+      // eslint-disable-next-line vue/require-valid-default-prop
+      default: {}
     }
   },
   data () {

@@ -1,16 +1,17 @@
 import {DataTypes} from "sequelize";
 import database from "../database.js";
 
-export default database.define('User', {
+export default database.define('Category', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        login: DataTypes.STRING,
-        password: DataTypes.STRING
+        userId: DataTypes.INTEGER,
+        name: DataTypes.STRING,
+        color: DataTypes.STRING
     },
     {
-        tableName: 'users',
+        tableName: 'categories',
         timestamps: false,
     });

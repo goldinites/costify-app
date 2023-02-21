@@ -1,7 +1,9 @@
 import userModel from "../models/userModel.js";
 
 export const getUsersService = (req, res) => {
-    userModel.findAll().then(user => {
+    userModel.findOne({
+        attributes: ['login', 'id']
+    }).then(user => {
         res.status(200).json(user);
     })
 }
