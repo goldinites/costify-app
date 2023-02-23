@@ -5,6 +5,6 @@ import categoriesRoutes from "./categoriesRoutes.js";
 const router = Router();
 
 router.use(userRouter);
-router.use(categoriesRoutes);
+router.use('/categories', categoriesRoutes);
 
 export default router;

@@ -1,43 +1,25 @@
 <template>
-  <form @submit.prevent="createCategory">
-    <input v-model="categoryName" type="text" placeholder="Название категории">
-    <input v-model="categoryColor" type="text" placeholder="Цвет категории">
-    <button type="submit">
-      Создать категорию
-    </button>
-  </form>
+  <div>
+    <div v-if="userId">
+      <CategoriesList />
+    </div>
+    <div v-else>
+      Загрузка данных пользователя...
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import CategoriesList from '@/components/CategoriesList'
 
 export default {
   name: 'IndexPage',
-  data () {
-    return {
-      categoryName: '',
-      categoryColor: ''
-    }
-  },
+  components: { CategoriesList },
   computed: {
     ...mapGetters({
-      userId: 'user/getUserId'
+      userId: 'user/userId'
     })
-  },
-  mounted () {
-    fetch('/api/user')
-      .then(res => res.json())
-      .then(userData => this.$store.dispatch('user/getUserData', userData))
-  },
-  methods: {
-    createCategory () {
-      const categoryData = {
-        name: this.categoryName,
-        color: this.categoryColor,
-        userId: this.userId
-      }
-      this.$store.dispatch('categories/createCategory', categoryData)
-    }
   }
 }
 </script>

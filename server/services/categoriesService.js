@@ -1,6 +1,6 @@
 import categoryModel from "../models/categoryModel.js";
 
-export const getUserCategories = (req, res) => {
+export const getUserCategoriesService = (req, res) => {
     const request = req.body;
     categoryModel.findAll({
         where: {
@@ -11,7 +11,7 @@ export const getUserCategories = (req, res) => {
         .catch(e => console.log(e))
 }
 
-export const getUserCategoryById = (req, res) => {
+export const getUserCategoryByIdService = (req, res) => {
     const request = req.body;
     categoryModel.findAll({
         where: {
@@ -31,5 +31,16 @@ export const createCategoryService = (req, res) => {
         userId: request.userId,
     })
         .then(newCategory => res.status(200).json(newCategory))
+        .catch(e => console.log(e))
+}
+
+export const deleteCategoryService = (req, res) => {
+    const request = req.body;
+    categoryModel.destroy({
+        where: {
+            id: request.id
+        }
+    })
+        .then(deletedCategory => res.status(200).json(deletedCategory))
         .catch(e => console.log(e))
 }

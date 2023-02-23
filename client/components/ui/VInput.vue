@@ -41,6 +41,28 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.v-input {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 
+  & input {
+    display: block;
+    border: 1px solid $border_color;
+    background-color: $glass_bg;
+    transition: .4s;
+    color: $white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    &:hover, &:focus {
+      @include hover_slide_effect;
+    }
+  }
+
+  & label {
+    color: $white;
+    @include font(17px, 23px);
+  }
+}
 </style>

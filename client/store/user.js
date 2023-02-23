@@ -5,8 +5,16 @@ export default {
     }
   },
   actions: {
-    getUserData ({ commit }, payload) {
-      commit('setUserData', payload)
+    getUserData ({ commit, dispatch }) {
+      fetch('/api/user')
+        .then(res => res.json())
+        .then((userData) => {
+          const userId = {
+            userId: userData.id
+          }
+          commit('setUserData', userData)
+          dispatch('categories/getCategories', userId, { root: true })
+        })
     }
   },
   mutations: {
@@ -15,13 +23,13 @@ export default {
     }
   },
   getters: {
-    getUser (state) {
+    user (state) {
       return state.user
     },
-    getUserId (state) {
+    userId (state) {
       return state.user.id
     },
-    getUserLogin (state) {
+    userLogin (state) {
       return state.user.login
     }
   }

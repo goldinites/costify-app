@@ -1,4 +1,4 @@
-export const randomString = (length) => {
+export const randomString = (length = 10) => {
   let result = ''
   const characters = 'AaBbCcDdEeFfGgHhJjKkLMmNnOoPpRrSsTtUuVvWwXxYyZziq23456789'
   const charactersLength = characters.length
