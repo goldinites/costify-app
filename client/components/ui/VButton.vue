@@ -24,7 +24,7 @@ export default {
   background-color: $glass_bg;
   color: $white;
   cursor: pointer;
-  padding: 10px 15px;
+  padding: 10px 25px;
   border-radius: 12px;
   overflow: hidden;
   &:after {
@@ -42,7 +42,7 @@ export default {
   }
   & span {
     position: relative;
-    font-size: 20px;
+    @include font(17px, 23px);
     font-weight: 500;
   }
 }

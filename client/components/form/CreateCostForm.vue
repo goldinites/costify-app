@@ -1,18 +1,33 @@
 <template>
-  <VForm @submit="createCategory">
+  <VForm>
     <div class="form-field">
       <VInput
         v-model="categoryName"
-        placeholder="Название категории"
-        label="Введите название категории"
+        placeholder="Название расхода"
+        label="Введите название расхода"
       />
     </div>
     <div class="form-field">
-      <VColorInput v-model="categoryColor" />
+      <VInput
+        v-model="categoryName"
+        placeholder="Стоимость расхода"
+        label="Введите стоимость расхода"
+      />
+    </div>
+    <div class="form-field">
+      <VDate label="Укажите дату расхода" />
+    </div>
+    <div class="form-field">
+      <VSelect
+        v-if="categories.length"
+        label="Укажите категорию расхода"
+        :items="categories"
+        :items-label="'name'"
+      />
     </div>
     <div class="form-field">
       <VButton @click="createCategory">
-        Создать категорию
+        Создать расход
       </VButton>
     </div>
   </VForm>
@@ -20,29 +35,28 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VColorInput from '@/components/ui/VColorInput'
 import VInput from '@/components/ui/VInput'
 import VButton from '@/components/ui/VButton'
+import VDate from '@/components/ui/VDate'
+import VSelect from '@/components/ui/VSelect'
 import VForm from '@/components/ui/VForm'
-import { randomHex } from '@/helpers/utils'
 
 export default {
   name: 'CreateCategoryForm',
-  components: { VForm, VButton, VColorInput, VInput },
+  components: { VForm, VSelect, VDate, VButton, VInput },
   data () {
     return {
       categoryName: '',
-      categoryColor: '#ffffff'
+      categoryColor: '#ffffff',
+      error: ''
     }
   },
   computed: {
     ...mapGetters({
+      categories: 'categories/categories',
       categoriesNames: 'categories/categoriesNames',
       userId: 'user/userId'
     })
-  },
-  mounted () {
-    this.categoryColor = randomHex()
   },
   methods: {
     createCategory () {
@@ -55,7 +69,12 @@ export default {
           }
           this.$store.dispatch('categories/createCategory', categoryData)
           this.clearFormFields()
+          this.error = ''
+        } else {
+          this.error = 'Категория с таким названием уже существует'
         }
+      } else {
+        this.error = 'Введите название категории'
       }
     },
     checkNotEmptyCategoryName (name) {

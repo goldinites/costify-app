@@ -9,3 +9,8 @@ body {
   max-width: 1140px;
   margin: 0 auto;
 }
+
+.mx-datepicker-main {
+  background-color: $bg !important;
+  border: 1px solid $border_color !important;
+}

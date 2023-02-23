@@ -1,8 +1,8 @@
 <template>
   <div class="v-input">
-    <label v-if="label" :for="inputId">{{ label }}</label>
+    <label v-if="label" :for="id">{{ label }}</label>
     <input
-      :id="inputId"
+      :id="id"
       :type="inputType"
       :placeholder="placeholder"
       @input="$emit('input', $event.target.value)"
@@ -33,10 +33,13 @@ export default {
       default: ''
     }
   },
-  computed: {
-    inputId () {
-      return randomString(10)
+  data () {
+    return {
+      id: ''
     }
+  },
+  beforeMount () {
+    this.id = randomString()
   }
 }
 </script>
@@ -55,6 +58,10 @@ export default {
     color: $white;
     padding: 10px 15px;
     border-radius: 5px;
+    &::placeholder {
+      color: $white;
+    }
+
     &:hover, &:focus {
       @include hover_slide_effect;
     }

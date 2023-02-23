@@ -1,7 +1,9 @@
 <template>
   <div id="costify" class="container">
     <TheHeader />
-    <Nuxt />
+    <div class="wrapper">
+      <Nuxt />
+    </div>
   </div>
 </template>
 
@@ -18,5 +20,7 @@ export default {
 </script>
 
 <style scoped>
-
+.wrapper {
+  margin-top: 40px;
+}
 </style>

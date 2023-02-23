@@ -9,3 +9,7 @@ export const randomString = (length = 10) => {
   }
   return result
 }
+
+export const randomHex = () => {
+  return `#${(Math.random().toString(16) + '000000').substring(2, 8).toUpperCase()}`
+}
