@@ -1,7 +1,7 @@
 <template>
   <div class="select">
     <span class="select__label">{{ label }}</span>
-    <VueSelect :label="itemsLabel" :options="items" />
+    <VueSelect v-model="selectedValue" :label="itemsLabel" :options="items" />
   </div>
 </template>
 
@@ -25,6 +25,19 @@ export default {
       type: Array,
       required: true
     }
+  },
+  data () {
+    return {
+      selectedValue: {}
+    }
+  },
+  watch: {
+    selectedValue () {
+      this.$emit('select', this.selectedValue)
+    }
+  },
+  mounted () {
+    this.selectedValue = this.items[0]
   }
 }
 </script>
@@ -43,6 +56,9 @@ export default {
 
   &:deep(.vs__dropdown-toggle) {
     background: $glass_bg;
+    color: $white;
+  }
+  &:deep(.vs--single .vs__selected) {
     color: $white;
   }
 }

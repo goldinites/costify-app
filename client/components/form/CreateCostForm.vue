@@ -1,21 +1,25 @@
 <template>
-  <VForm>
+  <VForm @submit="createCost">
+    <h3 class="form-title">
+      Добавить расход
+    </h3>
     <div class="form-field">
       <VInput
-        v-model="categoryName"
+        v-model="costName"
         placeholder="Название расхода"
         label="Введите название расхода"
       />
     </div>
     <div class="form-field">
       <VInput
-        v-model="categoryName"
+        v-model="costValue"
+        input-type="number"
         placeholder="Стоимость расхода"
         label="Введите стоимость расхода"
       />
     </div>
     <div class="form-field">
-      <VDate label="Укажите дату расхода" />
+      <VDate v-model="costDate" label="Укажите дату расхода" @date-selected="selectDateHandler($event)" />
     </div>
     <div class="form-field">
       <VSelect
@@ -23,11 +27,12 @@
         label="Укажите категорию расхода"
         :items="categories"
         :items-label="'name'"
+        @select="selectCategoryHandler($event)"
       />
     </div>
     <div class="form-field">
-      <VButton @click="createCategory">
-        Создать расход
+      <VButton>
+        Добавить расход
       </VButton>
     </div>
   </VForm>
@@ -42,50 +47,37 @@ import VSelect from '@/components/ui/VSelect'
 import VForm from '@/components/ui/VForm'
 
 export default {
-  name: 'CreateCategoryForm',
+  name: 'CreateCostForm',
   components: { VForm, VSelect, VDate, VButton, VInput },
   data () {
     return {
-      categoryName: '',
-      categoryColor: '#ffffff',
-      error: ''
+      costName: '',
+      costValue: '',
+      costDate: '',
+      costCategory: ''
     }
   },
   computed: {
     ...mapGetters({
       categories: 'categories/categories',
-      categoriesNames: 'categories/categoriesNames',
       userId: 'user/userId'
     })
   },
   methods: {
-    createCategory () {
-      if (this.checkNotEmptyCategoryName(this.categoryName)) {
-        if (this.checkCategoryName(this.categoryName)) {
-          const categoryData = {
-            name: this.categoryName,
-            color: this.categoryColor,
-            userId: this.userId
-          }
-          this.$store.dispatch('categories/createCategory', categoryData)
-          this.clearFormFields()
-          this.error = ''
-        } else {
-          this.error = 'Категория с таким названием уже существует'
-        }
-      } else {
-        this.error = 'Введите название категории'
+    createCost () {
+      const costData = {
+        name: this.costName,
+        value: this.costValue,
+        categoryId: this.costCategory.id,
+        date: this.costDate
       }
+      this.$store.dispatch('costs/createCost', costData)
     },
-    checkNotEmptyCategoryName (name) {
-      return name.length
+    selectCategoryHandler (event) {
+      this.costCategory = event
     },
-    checkCategoryName (name) {
-      return this.categoriesNames.every(category => category.toLowerCase() !== name.toLowerCase())
-    },
-    clearFormFields () {
-      this.categoryName = ''
-      this.categoryColor = '#ffffff'
+    selectDateHandler (event) {
+      this.costDate = event
     }
   }
 }

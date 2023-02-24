@@ -16,6 +16,7 @@ export default {
   flex-direction: column;
   flex: 1;
   gap: 20px;
+  background-color: $glass_bg;
   border: 1px solid $border_color;
   padding: 12px;
   border-radius: 12px;

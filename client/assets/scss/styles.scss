@@ -1,8 +1,10 @@
 @import "vars";
 
 body {
-  background-color: $bg;
+  background: $bg;
+  background-blend-mode: multiply;
   color: $font_color;
+  min-height: 100vh;
 }
 
 .container {

@@ -1,5 +1,8 @@
 <template>
   <VForm @submit="createCategory">
+    <h3 class="form-title">
+      Создать категорию расходов
+    </h3>
     <div class="form-field">
       <VInput
         v-model="categoryName"
@@ -11,7 +14,7 @@
       <VColorInput v-model="categoryColor" />
     </div>
     <div class="form-field">
-      <VButton @click="createCategory">
+      <VButton>
         Создать категорию
       </VButton>
     </div>

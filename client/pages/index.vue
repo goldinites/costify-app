@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="userId">
-      <CategoriesList />
+      <TimelineCosts />
     </div>
     <div v-else>
       Загрузка данных пользователя...
@@ -11,16 +11,17 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import CategoriesList from '@/components/CategoriesList'
+import TimelineCosts from '@/components/TimelineCosts'
 
 export default {
   name: 'IndexPage',
-  components: { CategoriesList },
+  components: { TimelineCosts },
   computed: {
     ...mapGetters({
       userId: 'user/userId'
     })
   }
+
 }
 </script>
 

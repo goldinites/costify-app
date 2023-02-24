@@ -1,7 +1,7 @@
 <template>
   <div class="date-picker">
     <span v-if="label" class="date-picker__label">{{ label }}</span>
-    <date-picker v-model="date" />
+    <date-picker v-model="date" :format="format" :value-type="format" />
   </div>
 </template>
 
@@ -22,11 +22,17 @@ export default {
   },
   data () {
     return {
-      date: ''
+      date: '',
+      format: 'DD.MM.YYYY'
+    }
+  },
+  watch: {
+    date () {
+      this.$emit('date-selected', this.date)
     }
   },
   mounted () {
-    this.date = new Date()
+    this.date = new Intl.DateTimeFormat('ru').format(new Date())
   }
 }
 </script>

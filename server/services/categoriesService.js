@@ -1,4 +1,5 @@
 import categoryModel from "../models/categoryModel.js";
+import CostModel from "../models/costModel.js";
 
 export const getUserCategoriesService = (req, res) => {
     const request = req.body;
@@ -7,7 +8,23 @@ export const getUserCategoriesService = (req, res) => {
             userId: request.userId
         }
     })
-        .then(userCategories => res.status(200).json(userCategories))
+        .then(userCategories => {
+            res.status(200).json(userCategories);
+            return userCategories;
+        })
+        .catch(e => console.log(e))
+}
+
+export const getUserCategoriesWithCostsService = (req, res) => {
+    const request = req.body;
+    categoryModel.findAll({
+        where: {
+            userId: request.userId
+        }
+    })
+        .then(userCategories => {
+            res.status(200).json(userCategories);
+        })
         .catch(e => console.log(e))
 }
 
@@ -41,6 +58,15 @@ export const deleteCategoryService = (req, res) => {
             id: request.id
         }
     })
-        .then(deletedCategory => res.status(200).json(deletedCategory))
+        .then(deletedCategoryStatus => {
+            if(deletedCategoryStatus) {
+                CostModel.destroy({
+                    where: {
+                        categoryId: request.id
+                    }
+                })
+                    .then(deleteCostsStatus => res.status(200).json(deleteCostsStatus))
+            }
+        })
         .catch(e => console.log(e))
 }

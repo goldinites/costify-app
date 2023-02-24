@@ -6,10 +6,10 @@ import {
 
 class categoriesController {
     createCategoryController(req, res) {
-        createCategoryService(req, res);
+        createCategoryService(req, res)
     }
     getCategoriesController(req, res) {
-        getUserCategoriesService(req, res);
+       getUserCategoriesService(req, res)
     }
     deleteCategoryController(req, res) {
         deleteCategoryService(req, res)

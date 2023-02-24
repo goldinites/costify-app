@@ -12,11 +12,16 @@ export default {
   name: 'VColorInput',
   data () {
     return {
-      color: '#ffffff',
+      color: '',
       id: ''
     }
   },
-  beforeMount () {
+  watch: {
+    color () {
+      this.$emit('input', this.color)
+    }
+  },
+  mounted () {
     this.id = randomString()
     this.color = randomHex()
   }

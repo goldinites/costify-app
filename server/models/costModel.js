@@ -10,7 +10,9 @@ export default database.define('Cost', {
         categoryId: DataTypes.INTEGER,
         name: DataTypes.STRING,
         value: DataTypes.STRING,
-        date: DataTypes.DATE
+        date: DataTypes.STRING,
+        monthCreate: DataTypes.INTEGER,
+        yearCreate: DataTypes.INTEGER
     },
     {
         tableName: 'costs',
