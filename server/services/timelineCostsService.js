@@ -6,7 +6,7 @@ export const getTimelineService = (req, res) => {
     const request = req.body;
     CostModel.findAll({
         where: {
-          userId: request.userId
+            userId: request.userId
         },
         attributes: ['yearCreate', 'monthCreate']
     })
@@ -37,12 +37,12 @@ const prepareTimelineHandler = (timeline, res) => {
         const timelineItemsOfCurrentYear = timeline.filter(timelineItem => timelineItem.yearCreate === year);
         const arrayMonths = arrayUnique(timelineItemsOfCurrentYear.map((month, i) => timelineItemsOfCurrentYear[i].monthCreate));
         let months = arrayMonths.map(month => {
-            return { name: monthNames[month - 1], month }
+            return {name: monthNames[month - 1], month}
         })
 
-        months = months.sort((a,b) => a.month - b.month)
+        months = months.sort((a, b) => a.month - b.month)
 
-        result.push({ year, months })
+        result.push({year, months})
     })
 
     result = result.sort((a, b) => a.year - b.year);
@@ -60,14 +60,14 @@ export const getCurrentPeriodService = (req, res) => {
         }
     })
         .then(costs => {
-            const categoriesIds = arrayUnique(costs.map((cost,i) => costs[i].categoryId))
+            const categoriesIds = arrayUnique(costs.map((cost, i) => costs[i].categoryId))
             CategoryModel.findAll({
                 where: {
                     id: categoriesIds
                 }
             })
                 .then(categories => {
-                    const periodData = { categories, costs }
+                    const periodData = {categories, costs}
                     prepareTimelineCategories(periodData, res)
                 })
         })
@@ -89,15 +89,17 @@ const prepareTimelineCategories = (period, res) => {
     period.categories.forEach(category => {
         const categoryCosts = period.costs.filter(cost => cost.categoryId === category.id)
         const categoryTotal = () => {
-            let total = 0;
-         if(categoryCosts.length > 1) {
-             total = categoryCosts.reduce((prev, current) => {
-                return +prev.value + +current.value
-             })
-         } else {
-             total = categoryCosts[0].value
-         }
-         return +total
+            let total;
+            if (categoryCosts.length > 1) {
+                total = categoryCosts.reduce((accumulator, current) => {
+                    return +accumulator + +current.value
+                }, 0)
+            } else if (categoryCosts.length === 1) {
+                total = categoryCosts[0].value
+            } else {
+                total = 0
+            }
+            return total
         }
 
         const preparedCategory = {

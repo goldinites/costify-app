@@ -78,7 +78,11 @@ export default {
     },
     changeDiagram () {
       if (this.checkValidDiagramData) {
-        this.$emit('change-timeline-period', { year: this.currentYear, month: this.currentMonth, userId: this.userId })
+        this.$emit('change-timeline-period', {
+          year: this.currentYear,
+          month: this.currentMonth,
+          userId: this.userId
+        })
       }
     }
   }
@@ -90,7 +94,7 @@ export default {
   &__head {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
   }
 
   &__years, &__months {
@@ -99,10 +103,19 @@ export default {
   }
 
   &__year, &__month {
+    background: $glass_bg;
+    padding: 8px 15px;
+    border-radius: 12px;
+    color: $white;
     cursor: pointer;
+    @include font(15px, 20px);
+
+    &:hover:not(.active) {
+      box-shadow: 0 0 0 1px $border_color;
+    }
 
     &.active {
-      color: red;
+      background: $default-gradient;
     }
   }
 }
