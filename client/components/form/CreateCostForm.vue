@@ -69,6 +69,7 @@ export default {
         name: this.costName,
         value: this.costValue,
         categoryId: this.costCategory.id,
+        userId: this.userId,
         date: this.costDate
       }
       this.$store.dispatch('costs/createCost', costData)

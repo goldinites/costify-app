@@ -3,20 +3,7 @@ import CostModel from "../models/costModel.js";
 
 export const getUserCategoriesService = (req, res) => {
     const request = req.body;
-    categoryModel.findAll({
-        where: {
-            userId: request.userId
-        }
-    })
-        .then(userCategories => {
-            res.status(200).json(userCategories);
-            return userCategories;
-        })
-        .catch(e => console.log(e))
-}
-
-export const getUserCategoriesWithCostsService = (req, res) => {
-    const request = req.body;
+    console.log(request)
     categoryModel.findAll({
         where: {
             userId: request.userId
@@ -25,18 +12,6 @@ export const getUserCategoriesWithCostsService = (req, res) => {
         .then(userCategories => {
             res.status(200).json(userCategories);
         })
-        .catch(e => console.log(e))
-}
-
-export const getUserCategoryByIdService = (req, res) => {
-    const request = req.body;
-    categoryModel.findAll({
-        where: {
-            userId: request.userId,
-            id: request.categoryId
-        }
-    })
-        .then(category => res.status(200).json(category))
         .catch(e => console.log(e))
 }
 

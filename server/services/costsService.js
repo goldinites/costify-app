@@ -6,6 +6,7 @@ export const createCostService = (req, res) => {
         name: request.name,
         value: request.value,
         categoryId: request.categoryId,
+        userId: request.userId,
         date: request.date,
         monthCreate: request.monthCreate,
         yearCreate: request.yearCreate

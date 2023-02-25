@@ -3,8 +3,12 @@ import timelineCostsController from "../controllers/timelineCostsController.js";
 
 const router = Router();
 
-router.get('/getTimeline', (req, res) => {
+router.post('/getTimeline', (req, res) => {
     timelineCostsController.getTimelineController(req, res)
 });
+
+router.post('/getCurrentPeriod', (req, res) => {
+    timelineCostsController.getCurrentPeriodController(req, res)
+})
 
 export default router;

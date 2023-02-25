@@ -8,6 +8,7 @@ export default database.define('Cost', {
             autoIncrement: true
         },
         categoryId: DataTypes.INTEGER,
+        userId: DataTypes.INTEGER,
         name: DataTypes.STRING,
         value: DataTypes.STRING,
         date: DataTypes.STRING,
