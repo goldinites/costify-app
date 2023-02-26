@@ -19,7 +19,11 @@
       />
     </div>
     <div class="form-field">
-      <VDate v-model="costDate" label="Укажите дату расхода" @date-selected="selectDateHandler($event)" />
+      <VDate
+        v-model="costDate"
+        label="Укажите дату расхода"
+        @date-selected="selectDateHandler($event)"
+      />
     </div>
     <div class="form-field">
       <VSelect
@@ -27,6 +31,8 @@
         label="Укажите категорию расхода"
         :items="categories"
         :items-label="'name'"
+        :begin-selected="categories[0]"
+        :searchable="true"
         @select="selectCategoryHandler($event)"
       />
     </div>

@@ -1,8 +1,7 @@
 export default {
   state () {
     return {
-      user: {},
-      hasRecords: false
+      user: {}
     }
   },
   actions: {
@@ -10,18 +9,13 @@ export default {
       fetch('/api/user')
         .then(res => res.json())
         .then((userData) => {
-          const userId = {
-            userId: userData.user.id
-          }
           commit('setUserData', userData)
-          dispatch('categories/getCategories', userId, { root: true })
         })
     }
   },
   mutations: {
-    setUserData (state, userData) {
-      state.user = userData.user
-      state.hasRecords = userData.hasRecords
+    setUserData (state, user) {
+      state.user = user
     }
   },
   getters: {
@@ -32,7 +26,7 @@ export default {
       return state.user.id
     },
     hasRecords (state) {
-      return state.hasRecords
+      return state.user.hasRecords
     },
     userLogin (state) {
       return state.user.login

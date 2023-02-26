@@ -8,6 +8,7 @@ export const createCostService = (req, res) => {
         categoryId: request.categoryId,
         userId: request.userId,
         date: request.date,
+        dayCreate: request.dayCreate,
         monthCreate: request.monthCreate,
         yearCreate: request.yearCreate
     })

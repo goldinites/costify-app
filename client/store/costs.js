@@ -6,6 +6,7 @@ export default {
     createCost ({ commit }, payload) {
       const costData = {
         ...payload,
+        dayCreate: Math.abs(payload.date.split('.')[0]),
         monthCreate: Math.abs(payload.date.split('.')[1]),
         yearCreate: Math.abs(payload.date.split('.')[2])
       }

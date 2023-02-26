@@ -12,6 +12,7 @@ export default database.define('Cost', {
         name: DataTypes.STRING,
         value: DataTypes.STRING,
         date: DataTypes.STRING,
+        dayCreate: DataTypes.INTEGER,
         monthCreate: DataTypes.INTEGER,
         yearCreate: DataTypes.INTEGER
     },

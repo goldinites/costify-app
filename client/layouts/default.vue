@@ -12,10 +12,7 @@ import TheHeader from '~/components/TheHeader.vue'
 
 export default {
   name: 'Default',
-  components: { TheHeader },
-  mounted () {
-    this.$store.dispatch('user/getUserData')
-  }
+  components: { TheHeader }
 }
 </script>
 

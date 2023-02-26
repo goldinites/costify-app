@@ -6,11 +6,23 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CreateCategoryForm from '@/components/form/CreateCategoryForm'
 import CreateCostForm from '@/components/form/CreateCostForm'
 export default {
   name: 'Record',
-  components: { CreateCategoryForm, CreateCostForm }
+  components: { CreateCategoryForm, CreateCostForm },
+  computed: {
+    ...mapGetters({
+      userId: 'user/userId'
+    })
+  },
+  mounted () {
+    this.$store.dispatch('user/getUserData')
+    this.$store.dispatch('categories/getCategories', {
+      userId: this.userId
+    })
+  }
 }
 </script>
 

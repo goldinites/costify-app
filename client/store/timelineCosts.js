@@ -2,10 +2,11 @@ export default {
   state () {
     return {
       timeline: [],
-      lastYear: 0,
-      lastMonth: 0,
       categories: [],
-      diagram: {}
+      diagram: {},
+      lastYear: false,
+      lastMonth: false,
+      lastDay: false
     }
   },
   actions: {
@@ -37,8 +38,24 @@ export default {
   mutations: {
     setTimeline (state, timeline) {
       state.timeline = timeline
-      state.lastYear = timeline.at(-1).year
-      state.lastMonth = timeline.at(-1).months.at(-1).month
+      const hasYears = timeline.at(-1).year
+      if (timeline && hasYears) {
+        state.lastYear = timeline.at(-1).year
+        const hasMonths = !!timeline.at(-1).months
+        if (state.lastYear && hasMonths) {
+          state.lastMonth = timeline.at(-1).months.at(-1).month
+          const hasDays = !!timeline.at(-1).months.at(-1).days
+          if (state.lastMonth && hasDays) {
+            state.lastDay = timeline.at(-1).months.at(-1).days.at(-1)
+          } else {
+            state.lastDay = false
+          }
+        } else {
+          state.lastMonth = false
+        }
+      } else {
+        state.lastYear = false
+      }
     },
     setCurrentPeriod (state, period) {
       state.categories = period.categories
@@ -60,6 +77,9 @@ export default {
     },
     lastMonth (state) {
       return state.lastMonth
+    },
+    lastDay (state) {
+      return state.lastDay
     }
   }
 }

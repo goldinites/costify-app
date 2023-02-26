@@ -1,5 +1,18 @@
 <template>
   <div class="timeline-costs__head">
+    <div class="timeline-costs__head-title">
+      <h2 class="timeline-costs__head-title-text">
+        Ваши графики расходов по
+      </h2>
+      <div class="timeline-costs__head-title-filter">
+        <VSelect
+          :items="filter"
+          :items-label="'filterName'"
+          :begin-selected="filter[1]"
+          @select="updateFilterHandler($event)"
+        />
+      </div>
+    </div>
     <div class="timeline-costs__years">
       <div
         v-for="(timelineItem, index) in timeline"
@@ -12,7 +25,7 @@
       </div>
     </div>
     <div
-      v-if="currentYear"
+      v-if="currentMonth"
       class="timeline-costs__months"
     >
       <div
@@ -25,18 +38,50 @@
         {{ month.name }}
       </div>
     </div>
+    <div
+      v-if="currentDay"
+      class="timeline-costs__months"
+    >
+      <div
+        v-for="(day, index) in days"
+        :key="index"
+        class="timeline-costs__month"
+        :class="{'active': day === currentDay}"
+        @click="changeCurrentDay(day)"
+      >
+        {{ day }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import VSelect from '@/components/ui/VSelect'
 
 export default {
   name: 'TimelineLine',
+  components: { VSelect },
   data () {
     return {
       currentYear: 0,
-      currentMonth: 0
+      currentMonth: 0,
+      currentDay: 0,
+      filter: [
+        {
+          filterValue: 'years',
+          filterName: 'Годам'
+        },
+        {
+          filterValue: 'months',
+          filterName: 'Месяцам'
+        },
+        {
+          filterValue: 'days',
+          filterName: 'Дням'
+        }
+      ],
+      currentFilter: {}
     }
   },
   computed: {
@@ -44,13 +89,42 @@ export default {
       timeline: 'timelineCosts/timeline',
       lastYear: 'timelineCosts/lastYear',
       lastMonth: 'timelineCosts/lastMonth',
+      lastDay: 'timelineCosts/lastDay',
       userId: 'user/userId'
     }),
+    years () {
+      return this.timeline.map((timelineItem, i) => {
+        return this.timeline[i].year
+      })
+    },
     months () {
-      return this.timeline.find(timelineItem => timelineItem.year === this.currentYear)?.months
+      if (this.currentFilter.filterValue !== 'years') {
+        return this.timeline.find((timelineItem) => {
+          return timelineItem.year === this.currentYear
+        })?.months
+      } else {
+        return []
+      }
+    },
+    days () {
+      if (this.currentFilter.filterValue === 'days') {
+        return this.months.find((month) => {
+          return month.month === this.currentMonth
+        })?.days
+      } else {
+        return []
+      }
     },
     checkValidDiagramData () {
-      return this.currentYear > 0 && this.currentMonth > 0
+      if (this.currentFilter.filterValue === 'years' && !!this.currentYear) {
+        return true
+      } else if (this.currentFilter.filterValue === 'months' && !!this.currentYear && !!this.currentMonth) {
+        return true
+      } else if (this.currentFilter.filterValue === 'days' && !!this.currentYear && !!this.currentMonth && !!this.currentDay) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   watch: {
@@ -59,31 +133,60 @@ export default {
     },
     lastMonth () {
       this.changeCurrentMonth(this.lastMonth)
+    },
+    lastDay () {
+      this.changeCurrentDay(this.lastDay)
     }
   },
   mounted () {
-    this.$store.dispatch('timelineCosts/getTimeline', { userId: this.userId })
     this.changeCurrentYear(this.lastYear)
     this.changeCurrentMonth(this.lastMonth)
+    this.changeCurrentDay(this.lastDay)
   },
   methods: {
     changeCurrentYear (year) {
-      this.currentYear = year
-      this.currentMonth = this.timeline.find(timelineItem => timelineItem.year === this.currentYear)?.months.at(-1)?.month
-      this.changeDiagram()
+      if (this.currentYear !== year) {
+        this.currentYear = year
+        if (this.months) {
+          this.currentMonth = this.months.at(-1)?.month
+          if (this.days) {
+            this.currentDay = this.days.at(-1)
+          }
+        }
+        this.changeDiagram()
+      }
     },
     changeCurrentMonth (month) {
-      this.currentMonth = month
-      this.changeDiagram()
+      if (this.currentMonth !== month) {
+        this.currentMonth = month
+        if (this.days) {
+          this.currentDay = this.days.at(-1)
+        }
+        this.changeDiagram()
+      }
+    },
+    changeCurrentDay (day) {
+      if (this.currentDay !== day) {
+        this.currentDay = day
+        this.changeDiagram()
+      }
     },
     changeDiagram () {
       if (this.checkValidDiagramData) {
         this.$emit('change-timeline-period', {
           year: this.currentYear,
           month: this.currentMonth,
+          day: this.currentDay,
           userId: this.userId
         })
       }
+    },
+    updateFilterHandler (event) {
+      this.currentFilter = event
+      this.$store.dispatch('timelineCosts/getTimeline', {
+        userId: this.userId,
+        periodFilter: this.currentFilter.filterValue
+      })
     }
   }
 }
@@ -95,6 +198,14 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    &-title {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      &-filter {
+        width: 170px;
+      }
+    }
   }
 
   &__years, &__months {

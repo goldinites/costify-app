@@ -13,3 +13,7 @@ export const randomString = (length = 10) => {
 export const randomHex = () => {
   return `#${(Math.random().toString(16) + '000000').substring(2, 8).toUpperCase()}`
 }
+
+export const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}

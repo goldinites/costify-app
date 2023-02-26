@@ -1,13 +1,14 @@
-$font_dir: '../fonts/';
+$manrope_dir: '../fonts/Manrope/';
+$merriweather_dir: '../fonts/Merriweather/';
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Bold.eot');
+  src: url('#{$manrope_dir}Manrope-Bold.eot');
   src: local('Manrope Bold'), local('Manrope-Bold'),
-  url('#{$font_dir}Manrope-Bold.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Bold.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Bold.woff') format('woff'),
-  url('#{$font_dir}Manrope-Bold.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Bold.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Bold.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Bold.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -15,77 +16,172 @@ $font_dir: '../fonts/';
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Semibold.eot');
+  src: url('#{$manrope_dir}Manrope-Semibold.eot');
   src: local('Manrope Semibold'), local('Manrope-Semibold'),
-  url('#{$font_dir}Manrope-Semibold.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Semibold.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Semibold.woff') format('woff'),
-  url('#{$font_dir}Manrope-Semibold.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Semibold.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Semibold.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Semibold.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Semibold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Regular.eot');
+  src: url('#{$manrope_dir}Manrope-Regular.eot');
   src: local('Manrope Regular'), local('Manrope-Regular'),
-  url('#{$font_dir}Manrope-Regular.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Regular.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Regular.woff') format('woff'),
-  url('#{$font_dir}Manrope-Regular.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Regular.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Regular.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Regular.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Light.eot');
+  src: url('#{$manrope_dir}Manrope-Light.eot');
   src: local('Manrope Light'), local('Manrope-Light'),
-  url('#{$font_dir}Manrope-Light.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Light.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Light.woff') format('woff'),
-  url('#{$font_dir}Manrope-Light.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Light.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Light.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Light.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Thin.eot');
+  src: url('#{$manrope_dir}Manrope-Thin.eot');
   src: local('Manrope Thin'), local('Manrope-Thin'),
-  url('#{$font_dir}Manrope-Thin.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Thin.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Thin.woff') format('woff'),
-  url('#{$font_dir}Manrope-Thin.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Thin.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Thin.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Thin.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Thin.ttf') format('truetype');
   font-weight: 100;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-Medium.eot');
+  src: url('#{$manrope_dir}Manrope-Medium.eot');
   src: local('Manrope Medium'), local('Manrope-Medium'),
-  url('#{$font_dir}Manrope-Medium.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-Medium.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-Medium.woff') format('woff'),
-  url('#{$font_dir}Manrope-Medium.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-Medium.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-Medium.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-Medium.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-Medium.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Manrope';
-  src: url('#{$font_dir}Manrope-ExtraBold.eot');
+  src: url('#{$manrope_dir}Manrope-ExtraBold.eot');
   src: local('Manrope ExtraBold'), local('Manrope-ExtraBold'),
-  url('#{$font_dir}Manrope-ExtraBold.eot?#iefix') format('embedded-opentype'),
-  url('#{$font_dir}Manrope-ExtraBold.woff2') format('woff2'),
-  url('#{$font_dir}Manrope-ExtraBold.woff') format('woff'),
-  url('#{$font_dir}Manrope-ExtraBold.ttf') format('truetype');
+  url('#{$manrope_dir}Manrope-ExtraBold.eot?#iefix') format('embedded-opentype'),
+  url('#{$manrope_dir}Manrope-ExtraBold.woff2') format('woff2'),
+  url('#{$manrope_dir}Manrope-ExtraBold.woff') format('woff'),
+  url('#{$manrope_dir}Manrope-ExtraBold.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
 }
 
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-BoldItalic.eot');
+  src: local('Merriweather Bold Italic'), local('Merriweather-BoldItalic'),
+  url('#{$merriweather_dir}Merriweather-BoldItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-BoldItalic.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-Italic.eot');
+  src: local('Merriweather Italic'), local('Merriweather-Italic'),
+  url('#{$merriweather_dir}Merriweather-Italic.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-Italic.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-Regular.eot');
+  src: local('Merriweather Regular'), local('Merriweather-Regular'),
+  url('#{$merriweather_dir}Merriweather-Regular.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-Regular.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-BlackItalic.eot');
+  src: local('Merriweather Black Italic'), local('Merriweather-BlackItalic'),
+  url('#{$merriweather_dir}Merriweather-BlackItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-BlackItalic.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-Bold.eot');
+  src: local('Merriweather Bold'), local('Merriweather-Bold'),
+  url('#{$merriweather_dir}Merriweather-Bold.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-Bold.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-Light.eot');
+  src: local('Merriweather Light'), local('Merriweather-Light'),
+  url('#{$merriweather_dir}Merriweather-Light.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-Light.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-Black.eot');
+  src: local('Merriweather Black'), local('Merriweather-Black'),
+  url('#{$merriweather_dir}Merriweather-Black.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-Black.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  src: url('#{$merriweather_dir}Merriweather-LightItalic.eot');
+  src: local('Merriweather Light Italic'), local('Merriweather-LightItalic'),
+  url('#{$merriweather_dir}Merriweather-LightItalic.eot?#iefix') format('embedded-opentype'),
+  url('#{$merriweather_dir}Merriweather-LightItalic.woff') format('woff'),
+  url('#{$merriweather_dir}Merriweather-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+
 * {
   font-family: 'Manrope';
   font-weight: 400;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Merriweather';
+  font-weight: 500;
 }

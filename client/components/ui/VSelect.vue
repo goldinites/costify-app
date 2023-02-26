@@ -1,7 +1,13 @@
 <template>
-  <div class="select">
-    <span class="select__label">{{ label }}</span>
-    <VueSelect v-model="selectedValue" :label="itemsLabel" :options="items" />
+  <div class="vselect">
+    <span class="vselect__label">{{ label }}</span>
+    <VueSelect
+      v-model="selectedValue"
+      :label="itemsLabel"
+      :options="items"
+      :clearable="clearable"
+      :searchable="searchable"
+    />
   </div>
 </template>
 
@@ -24,6 +30,18 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    beginSelected: {
+      type: Object,
+      required: true
+    },
+    clearable: {
+      type: Boolean,
+      default: false
+    },
+    searchable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -37,17 +55,17 @@ export default {
     }
   },
   mounted () {
-    this.selectedValue = this.items[0]
+    this.selectedValue = this.beginSelected
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import "vue-select/dist/vue-select.css";
-.select {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+.vselect {
+  //display: flex;
+  //flex-direction: column;
+  //gap: 7px;
 
   &__label {
     color: $white;

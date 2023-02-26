@@ -26,7 +26,11 @@ import VDoughnut from '@/components/ui/VDoughnut'
 
 export default {
   name: 'TimelineCosts',
-  components: { VDoughnut, TimelineCategory, TimelineLine },
+  components: {
+    VDoughnut,
+    TimelineCategory,
+    TimelineLine
+  },
   data () {
     return {
       year: 0,
@@ -54,10 +58,15 @@ export default {
 .timeline-costs {
   &__body {
     display: flex;
+    gap: 70px;
     margin-top: 40px;
   }
   &__diagram, &__categories {
     flex: 1;
+  }
+  &__categories {
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>

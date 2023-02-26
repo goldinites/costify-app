@@ -8,7 +8,7 @@
       </li>
       <li class="menu__item">
         <NuxtLink class="menu__link link" to="/record">
-          Добавить запись
+          Новая запись
         </NuxtLink>
       </li>
       <li class="menu__item">

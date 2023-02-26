@@ -19,16 +19,16 @@ export const getUsersService = (req, res) => {
                 })
                     .then(costs => {
                       const hasRecords = !!categories.length && !!costs.length;
-                      checkUserRecords(user, hasRecords, res)
+                      checkUserRecordsService(user, hasRecords, res)
                     })
             })
 
     })
 }
 
-const checkUserRecords = (user, hasRecords, res) => {
+const checkUserRecordsService = (user, hasRecords, res) => {
     const userData = {
-        user,
+        ...user.dataValues,
         hasRecords,
     }
     res.status(200).json(userData);

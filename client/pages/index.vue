@@ -3,11 +3,16 @@
     <div v-if="userId">
       <TimelineCosts v-if="hasRecords" />
       <div v-else>
-        Добавьте категорию и расходы
+        <h2 style="font-size: 72px; line-height: 100px;">
+          Для отображения графика,
+          <NuxtLink class="link" to="/record" style="font-family: 'Merriweather'">
+            создайте категорию или расходы
+          </NuxtLink>
+        </h2>
       </div>
     </div>
     <div v-else>
-      Загрузка данных пользователя...
+      <h2>Загрузка данных пользователя...</h2>
     </div>
   </div>
 </template>
@@ -24,8 +29,10 @@ export default {
       userId: 'user/userId',
       hasRecords: 'user/hasRecords'
     })
+  },
+  mounted () {
+    this.$store.dispatch('user/getUserData')
   }
-
 }
 </script>
 

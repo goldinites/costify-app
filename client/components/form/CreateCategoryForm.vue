@@ -27,7 +27,7 @@ import VColorInput from '@/components/ui/VColorInput'
 import VInput from '@/components/ui/VInput'
 import VButton from '@/components/ui/VButton'
 import VForm from '@/components/ui/VForm'
-import { randomHex } from '@/helpers/utils'
+import { randomHex, capitalizeFirstLetter } from '@/helpers/utils'
 
 export default {
   name: 'CreateCategoryForm',
@@ -52,7 +52,7 @@ export default {
       if (this.checkNotEmptyCategoryName(this.categoryName)) {
         if (this.checkCategoryName(this.categoryName)) {
           const categoryData = {
-            name: this.categoryName,
+            name: capitalizeFirstLetter(this.categoryName),
             color: this.categoryColor,
             userId: this.userId
           }
@@ -69,7 +69,7 @@ export default {
     },
     clearFormFields () {
       this.categoryName = ''
-      this.categoryColor = '#ffffff'
+      this.categoryColor = randomHex()
     }
   }
 }
