@@ -2,34 +2,41 @@ import userModel from "../models/userModel.js";
 import CategoryModel from "../models/categoryModel.js";
 import CostModel from "../models/costModel.js";
 
-export const getUsersService = (req, res) => {
-    userModel.findOne({
-        attributes: ['login', 'id']
-    }).then(user => {
-        CategoryModel.findAll({
-            where: {
-                userId: user.id
-            }
-        })
-            .then(categories => {
-                CostModel.findAll({
-                    where: {
-                        userId: user.id
-                    }
-                })
-                    .then(costs => {
-                      const hasRecords = !!categories.length && !!costs.length;
-                      checkUserRecordsService(user, hasRecords, res)
-                    })
-            })
-
-    })
-}
-
-const checkUserRecordsService = (user, hasRecords, res) => {
-    const userData = {
-        ...user.dataValues,
-        hasRecords,
+class userService {
+    constructor() {
+        this.userModel = userModel
+        this.categoryModel = CategoryModel
+        this.costModel = CostModel
     }
-    res.status(200).json(userData);
+    getUserService(req, res) {
+        this.userModel.findOne({
+            attributes: ['login', 'id']
+        }).then(user => {
+            this.categoryModel.findAll({
+                where: {
+                    userId: user.id
+                }
+            })
+                .then(categories => {
+                    this.costModel.findAll({
+                        where: {
+                            userId: user.id
+                        }
+                    })
+                        .then(costs => {
+                            const hasRecords = !!categories.length && !!costs.length;
+                            this.prepareUserDataService(user, hasRecords, res)
+                        })
+                })
+        })
+    }
+    prepareUserDataService(user, hasRecords, res) {
+        const userData = {
+            ...user.dataValues,
+            hasRecords,
+        }
+        res.status(200).json(userData);
+    }
 }
+
+export default new userService();

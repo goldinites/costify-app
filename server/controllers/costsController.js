@@ -1,14 +1,12 @@
-import {
-    createCostService, getCostsOfCategoryService,
-} from "../services/costsService.js"
+import costsService from "../services/costsService.js";
 
-class categoriesController {
+class costsController {
     createCostController(req, res) {
-        createCostService(req, res);
+        costsService.createCostService(req, res);
     }
     getCostsOfCategoryController(req, res) {
-        getCostsOfCategoryService(req, res)
+        costsService.getCostsOfCategoryService(req, res)
     }
 }
 
-export default new categoriesController();
+export default new costsController();

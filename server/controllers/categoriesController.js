@@ -1,18 +1,14 @@
-import {
-    createCategoryService,
-    getUserCategoriesService,
-    deleteCategoryService
-} from "../services/categoriesService.js"
+import categoriesService from "../services/categoriesService.js";
 
 class categoriesController {
-    createCategoryController(req, res) {
-        createCategoryService(req, res)
-    }
     getCategoriesController(req, res) {
-       getUserCategoriesService(req, res)
+        categoriesService.getUserCategoriesService(req, res)
+    }
+    createCategoryController(req, res) {
+        categoriesService.createCategoryService(req, res)
     }
     deleteCategoryController(req, res) {
-        deleteCategoryService(req, res)
+        categoriesService.deleteCategoryService(req, res)
     }
 }
 

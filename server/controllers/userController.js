@@ -1,8 +1,8 @@
-import { getUsersService } from "../services/userService.js"
+import userService from "../services/userService.js";
 
 class userController {
     getUsersController(req, res) {
-        getUsersService(req, res);
+        userService.getUserService(req, res);
     }
 }
 

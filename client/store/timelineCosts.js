@@ -43,7 +43,7 @@ export default {
         state.lastYear = timeline.at(-1).year
         const hasMonths = !!timeline.at(-1).months
         if (state.lastYear && hasMonths) {
-          state.lastMonth = timeline.at(-1).months.at(-1).month
+          state.lastMonth = timeline.at(-1).months.at(-1)
           const hasDays = !!timeline.at(-1).months.at(-1).days
           if (state.lastMonth && hasDays) {
             state.lastDay = timeline.at(-1).months.at(-1).days.at(-1)

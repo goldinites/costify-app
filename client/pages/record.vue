@@ -17,11 +17,17 @@ export default {
       userId: 'user/userId'
     })
   },
+  watch: {
+    userId () {
+      if (this.userId) {
+        this.$store.dispatch('categories/getCategories', {
+          userId: this.userId
+        })
+      }
+    }
+  },
   mounted () {
     this.$store.dispatch('user/getUserData')
-    this.$store.dispatch('categories/getCategories', {
-      userId: this.userId
-    })
   }
 }
 </script>

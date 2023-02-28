@@ -1,0 +1,40 @@
+@import "vars";
+
+.select {
+  min-width: 125px;
+}
+
+.select .vs__search::placeholder,
+.select .vs__dropdown-toggle,
+.select .vs__dropdown-menu {
+  background: $glass_bg;
+  border: 1px solid $border_color;
+  color: $font_color;
+}
+
+.select .vs__selected {
+  color: $white;
+}
+
+.select .vs__dropdown-menu {
+  padding: 0;
+  min-width: auto;
+  background: $glass_bg;
+  backdrop-filter: blur(5px);
+  border: 1px solid $border_color;
+}
+
+.select .vs__dropdown-option--highlight {
+  background: $default-gradient;
+  color: $white;
+}
+
+.select .vs__clear,
+.select .vs__open-indicator {
+  fill: $font_color;
+}
+
+.mx-datepicker-main {
+  background-color: $dark_blue !important;
+  border: 1px solid $border_color !important;
+}

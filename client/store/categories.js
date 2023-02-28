@@ -6,6 +6,7 @@ export default {
   },
   actions: {
     getCategories ({ commit }, payload) {
+      // console.log(payload)
       fetch('/api/categories/getCategories', {
         method: 'post',
         headers: {

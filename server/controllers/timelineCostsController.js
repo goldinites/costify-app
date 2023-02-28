@@ -1,15 +1,12 @@
-import {
-    getCurrentPeriodService,
-    getTimelineService
-} from "../services/timelineCostsService.js";
+import timelineCostsService from "../services/timelineCostsService.js";
 
-class categoriesController {
+class timelineCostsController {
     getTimelineController (req, res) {
-        getTimelineService(req, res)
+        timelineCostsService.getTimelineService(req, res)
     }
     getCurrentPeriodController (req, res) {
-        getCurrentPeriodService(req, res)
+        timelineCostsService.getCurrentPeriodService(req, res)
     }
 }
 
-export default new categoriesController();
+export default new timelineCostsController();

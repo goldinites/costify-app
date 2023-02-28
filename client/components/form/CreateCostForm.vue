@@ -26,15 +26,17 @@
       />
     </div>
     <div class="form-field">
-      <VSelect
-        v-if="categories.length"
-        label="Укажите категорию расхода"
-        :items="categories"
-        :items-label="'name'"
-        :begin-selected="categories[0]"
-        :searchable="true"
-        @select="selectCategoryHandler($event)"
-      />
+      <div class="select">
+        <VueSelect
+          v-if="categories.length"
+          v-model="costCategory"
+          :options="categories"
+          label="name"
+          :searchable="true"
+          :clearable="false"
+          @input="selectCategoryHandler"
+        />
+      </div>
     </div>
     <div class="form-field">
       <VButton>
@@ -46,15 +48,15 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { VueSelect } from 'vue-select'
 import VInput from '@/components/ui/VInput'
 import VButton from '@/components/ui/VButton'
 import VDate from '@/components/ui/VDate'
-import VSelect from '@/components/ui/VSelect'
 import VForm from '@/components/ui/VForm'
 
 export default {
   name: 'CreateCostForm',
-  components: { VForm, VSelect, VDate, VButton, VInput },
+  components: { VForm, VueSelect, VDate, VButton, VInput },
   data () {
     return {
       costName: '',
@@ -68,6 +70,14 @@ export default {
       categories: 'categories/categories',
       userId: 'user/userId'
     })
+  },
+  watch: {
+    categories () {
+      this.costCategory = this.categories[0]
+    }
+  },
+  mounted () {
+    this.costCategory = this.categories[0]
   },
   methods: {
     createCost () {

@@ -5,51 +5,49 @@
         Ваши графики расходов по
       </h2>
       <div class="timeline-costs__head-title-filter">
-        <VSelect
-          :items="filter"
-          :items-label="'filterName'"
-          :begin-selected="filter[1]"
-          @select="updateFilterHandler($event)"
+        <div class="select">
+          <VueSelect
+            v-model="currentFilter"
+            :options="filter"
+            label="filterName"
+            :clearable="false"
+            :searchable="false"
+            @input="updateFilterHandler($event)"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="timeline-costs__line">
+      <div class="select">
+        <VueSelect
+          v-if="currentYear && years"
+          v-model="currentYear"
+          :options="years"
+          :clearable="false"
+          :searchable="false"
+          @input="changeCurrentYear"
         />
       </div>
-    </div>
-    <div class="timeline-costs__years">
-      <div
-        v-for="(timelineItem, index) in timeline"
-        :key="index"
-        class="timeline-costs__year"
-        :class="{'active': timelineItem.year === currentYear}"
-        @click="changeCurrentYear(timelineItem.year)"
-      >
-        {{ timelineItem.year }}
+      <div class="select">
+        <VueSelect
+          v-if="currentMonth && months"
+          v-model="currentMonth"
+          :options="months"
+          label="name"
+          :clearable="false"
+          :searchable="false"
+          @input="changeCurrentMonth"
+        />
       </div>
-    </div>
-    <div
-      v-if="currentMonth"
-      class="timeline-costs__months"
-    >
-      <div
-        v-for="(month, index) in months"
-        :key="index"
-        class="timeline-costs__month"
-        :class="{'active': month.month === currentMonth}"
-        @click="changeCurrentMonth(month.month)"
-      >
-        {{ month.name }}
-      </div>
-    </div>
-    <div
-      v-if="currentDay"
-      class="timeline-costs__months"
-    >
-      <div
-        v-for="(day, index) in days"
-        :key="index"
-        class="timeline-costs__month"
-        :class="{'active': day === currentDay}"
-        @click="changeCurrentDay(day)"
-      >
-        {{ day }}
+      <div class="select">
+        <VueSelect
+          v-if="currentDay && days"
+          v-model="currentDay"
+          :options="days"
+          :clearable="false"
+          :searchable="false"
+          @input="changeCurrentDay"
+        />
       </div>
     </div>
   </div>
@@ -57,11 +55,11 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import VSelect from '@/components/ui/VSelect'
+import { VueSelect } from 'vue-select'
 
 export default {
   name: 'TimelineLine',
-  components: { VSelect },
+  components: { VueSelect },
   data () {
     return {
       currentYear: 0,
@@ -108,9 +106,7 @@ export default {
     },
     days () {
       if (this.currentFilter.filterValue === 'days') {
-        return this.months.find((month) => {
-          return month.month === this.currentMonth
-        })?.days
+        return this.currentMonth.days
       } else {
         return []
       }
@@ -139,43 +135,40 @@ export default {
     }
   },
   mounted () {
+    this.currentFilter = this.filter[1]
+    this.updateFilterHandler(this.currentFilter)
+
     this.changeCurrentYear(this.lastYear)
     this.changeCurrentMonth(this.lastMonth)
     this.changeCurrentDay(this.lastDay)
   },
   methods: {
     changeCurrentYear (year) {
-      if (this.currentYear !== year) {
-        this.currentYear = year
-        if (this.months) {
-          this.currentMonth = this.months.at(-1)?.month
-          if (this.days) {
-            this.currentDay = this.days.at(-1)
-          }
-        }
-        this.changeDiagram()
-      }
-    },
-    changeCurrentMonth (month) {
-      if (this.currentMonth !== month) {
-        this.currentMonth = month
+      this.currentYear = year
+      if (this.months) {
+        this.currentMonth = this.months.at(-1)
         if (this.days) {
           this.currentDay = this.days.at(-1)
         }
-        this.changeDiagram()
       }
+      this.changeDiagram()
+    },
+    changeCurrentMonth (month) {
+      this.currentMonth = month
+      if (this.days) {
+        this.currentDay = this.days.at(-1)
+      }
+      this.changeDiagram()
     },
     changeCurrentDay (day) {
-      if (this.currentDay !== day) {
-        this.currentDay = day
-        this.changeDiagram()
-      }
+      this.currentDay = day
+      this.changeDiagram()
     },
     changeDiagram () {
       if (this.checkValidDiagramData) {
         this.$emit('change-timeline-period', {
           year: this.currentYear,
-          month: this.currentMonth,
+          month: this.currentMonth.month,
           day: this.currentDay,
           userId: this.userId
         })
@@ -193,6 +186,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import 'vue-select/dist/vue-select.css';
 .timeline-costs {
   &__head {
     display: flex;
@@ -208,26 +202,9 @@ export default {
     }
   }
 
-  &__years, &__months {
+  &__line {
     display: flex;
-    gap: 15px;
-  }
-
-  &__year, &__month {
-    background: $glass_bg;
-    padding: 8px 15px;
-    border-radius: 12px;
-    color: $white;
-    cursor: pointer;
-    @include font(15px, 20px);
-
-    &:hover:not(.active) {
-      box-shadow: 0 0 0 1px $border_color;
-    }
-
-    &.active {
-      background: $default-gradient;
-    }
+    gap: 25px;
   }
 }
 </style>
