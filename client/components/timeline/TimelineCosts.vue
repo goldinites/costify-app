@@ -6,13 +6,7 @@
         <VDoughnut :chart-data="diagram" />
       </div>
       <div class="timeline-costs__categories">
-        <div
-          v-for="(category,index) in categories"
-          :key="index"
-          class="timeline-costs__category-wrapper"
-        >
-          <TimelineCategory :category="category" />
-        </div>
+        <TimelineCategoriesList :categories="categories" />
       </div>
     </div>
   </div>
@@ -21,21 +15,15 @@
 <script>
 import { mapGetters } from 'vuex'
 import TimelineLine from '@/components/timeline/TimelineLine'
-import TimelineCategory from '@/components/timeline/TimelineCategory'
 import VDoughnut from '@/components/ui/VDoughnut'
+import TimelineCategoriesList from '@/components/timeline/TimelineCategoriesList'
 
 export default {
   name: 'TimelineCosts',
   components: {
+    TimelineCategoriesList,
     VDoughnut,
-    TimelineCategory,
     TimelineLine
-  },
-  data () {
-    return {
-      year: 0,
-      month: 0
-    }
   },
   computed: {
     ...mapGetters({
@@ -45,8 +33,6 @@ export default {
   },
   methods: {
     updateTimelinePeriod (event) {
-      this.year = event.year
-      this.month = event.month
       this.$store.dispatch('timelineCosts/getCurrentPeriod', event)
     }
   }
@@ -61,12 +47,9 @@ export default {
     gap: 70px;
     margin-top: 40px;
   }
+
   &__diagram, &__categories {
     flex: 1;
-  }
-  &__categories {
-    display: flex;
-    flex-direction: column;
   }
 }
 </style>

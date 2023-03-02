@@ -5,7 +5,7 @@ export default {
     }
   },
   actions: {
-    getUserData ({ commit, dispatch }) {
+    getUserData ({ commit }) {
       fetch('/api/user')
         .then(res => res.json())
         .then((userData) => {
@@ -27,9 +27,6 @@ export default {
     },
     hasRecords (state) {
       return state.user.hasRecords
-    },
-    userLogin (state) {
-      return state.user.login
     }
   }
 }

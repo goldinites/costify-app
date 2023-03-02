@@ -28,6 +28,9 @@ export default {
   },
   mounted () {
     this.$store.dispatch('user/getUserData')
+    this.$store.dispatch('categories/getCategories', {
+      userId: this.userId
+    })
   }
 }
 </script>

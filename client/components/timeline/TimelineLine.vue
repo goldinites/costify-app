@@ -12,7 +12,7 @@
             label="filterName"
             :clearable="false"
             :searchable="false"
-            @input="updateFilterHandler($event)"
+            @input="updateFilterHandler"
           />
         </div>
       </div>
@@ -25,7 +25,7 @@
           :options="years"
           :clearable="false"
           :searchable="false"
-          @input="changeCurrentYear"
+          @input="changeCurrentYear($event)"
         />
       </div>
       <div class="select">
@@ -36,7 +36,7 @@
           label="name"
           :clearable="false"
           :searchable="false"
-          @input="changeCurrentMonth"
+          @input="changeCurrentMonth($event)"
         />
       </div>
       <div class="select">
@@ -46,7 +46,7 @@
           :options="days"
           :clearable="false"
           :searchable="false"
-          @input="changeCurrentDay"
+          @input="changeCurrentDay($event)"
         />
       </div>
     </div>
@@ -116,10 +116,8 @@ export default {
         return true
       } else if (this.currentFilter.filterValue === 'months' && !!this.currentYear && !!this.currentMonth) {
         return true
-      } else if (this.currentFilter.filterValue === 'days' && !!this.currentYear && !!this.currentMonth && !!this.currentDay) {
-        return true
       } else {
-        return false
+        return this.currentFilter.filterValue === 'days' && !!this.currentYear && !!this.currentMonth && !!this.currentDay
       }
     }
   },
@@ -168,7 +166,7 @@ export default {
       if (this.checkValidDiagramData) {
         this.$emit('change-timeline-period', {
           year: this.currentYear,
-          month: this.currentMonth.month,
+          month: this.currentMonth?.month,
           day: this.currentDay,
           userId: this.userId
         })
@@ -176,6 +174,9 @@ export default {
     },
     updateFilterHandler (event) {
       this.currentFilter = event
+      if (this.currentYear !== this.lastYear) {
+        this.changeCurrentYear(this.lastYear)
+      }
       this.$store.dispatch('timelineCosts/getTimeline', {
         userId: this.userId,
         periodFilter: this.currentFilter.filterValue
@@ -187,18 +188,17 @@ export default {
 
 <style lang="scss" scoped>
 @import 'vue-select/dist/vue-select.css';
+
 .timeline-costs {
   &__head {
     display: flex;
     flex-direction: column;
     gap: 15px;
+
     &-title {
       display: flex;
       align-items: center;
-      gap: 20px;
-      &-filter {
-        width: 170px;
-      }
+      gap: 10px;
     }
   }
 

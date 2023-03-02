@@ -16,34 +16,6 @@ export default {
       required: true,
       default: () => {}
     }
-  },
-  data () {
-    return {
-      chartDataDemo: {
-        data: {
-          labels: ['Тест 1', 'Тест 2', 'Тест 3'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: ['violet', 'royalblue', 'darkcyan'],
-              data: [33, 33, 33]
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top'
-            },
-            title: {
-              display: true,
-              text: 'Chart.js Doughnut Chart'
-            }
-          }
-        }
-      }
-    }
   }
 }
 </script>
