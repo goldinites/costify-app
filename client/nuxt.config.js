@@ -40,7 +40,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    '@nuxtjs/svg-sprite'
+    '@nuxtjs/svg-sprite',
+    '@nuxtjs/axios'
   ],
   svgSprite: {
     input: '~/assets/svg/'

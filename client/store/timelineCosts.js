@@ -11,27 +11,15 @@ export default {
   },
   actions: {
     getTimeline ({ commit }, payload) {
-      fetch('/api/timeline/getTimeline', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
-        .then(timeline => commit('setTimeline', timeline))
+      this.$axios.post('/api/timeline/getTimeline', payload)
+        .then((timeline) => {
+          commit('setTimeline', timeline.data)
+        })
     },
     getCurrentPeriod ({ commit }, payload) {
-      fetch('/api/timeline/getCurrentPeriod', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
+      this.$axios.post('/api/timeline/getCurrentPeriod', payload)
         .then((period) => {
-          commit('setCurrentPeriod', period)
+          commit('setCurrentPeriod', period.data)
         })
     }
   },

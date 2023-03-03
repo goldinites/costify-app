@@ -6,41 +6,19 @@ export default {
   },
   actions: {
     getCategories ({ commit }, payload) {
-      // console.log(payload)
-      fetch('/api/categories/getCategories', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
+      this.$axios.post('/api/categories/getCategories', payload)
         .then((categories) => {
-          commit('setCategories', categories)
+          commit('setCategories', categories.data)
         })
     },
     createCategory ({ commit }, payload) {
-      fetch('/api/categories/create', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
+      this.$axios.post('/api/categories/create', payload)
         .then((newCategory) => {
-          commit('addCategory', newCategory)
+          commit('addCategory', newCategory.data)
         })
     },
     deleteCategory ({ commit }, payload) {
-      fetch('/api/categories/deleteCategory', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-        .then(res => res.json())
+      this.$axios.post('/api/categories/deleteCategory', payload)
         .then(() => {
           commit('deleteCategory', payload)
         })

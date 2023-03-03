@@ -6,10 +6,9 @@ export default {
   },
   actions: {
     getUserData ({ commit }) {
-      fetch('/api/user')
-        .then(res => res.json())
+      this.$axios.get('/api/user')
         .then((userData) => {
-          commit('setUserData', userData)
+          commit('setUserData', userData.data)
         })
     }
   },

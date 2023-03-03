@@ -10,33 +10,9 @@ export default {
         monthCreate: Math.abs(payload.date.split('.')[1]),
         yearCreate: Math.abs(payload.date.split('.')[2])
       }
-
-      fetch('api/costs/create', {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(costData)
-      })
-        .then(res => res.json())
-        .then((data) => {
-          // eslint-disable-next-line no-console
-          console.log(data)
-        })
+      this.$axios.post('/api/costs/create', costData)
+        .then(cost => cost)
     }
-    // getCostsOfCategory ({ commit }, payload) {
-    //   fetch('/api/costs/getCostsOfCategory', {
-    //     method: 'post',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ id: payload.id })
-    //   })
-    //     .then(res => res.json())
-    //     .then((costs) => {
-    //       costs
-    //     })
-    // }
   },
   mutations: {},
   getters: {}
